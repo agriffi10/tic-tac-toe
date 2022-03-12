@@ -70,9 +70,7 @@ function GameBoard() {
     let diagRTL = [];
     for (let i = 0; i < board.length; i++) {
       diagLTR.push(board[i][i]);
-    }
-    for (let i = board.length - 1; i >= 0; i--) {
-      diagRTL.push(board[i][Math.abs(i - (board.length - 1))]);
+      diagRTL.push(board[Math.abs(i - (board.length - 1))][i]);
     }
     return checkVals(diagLTR) || checkVals(diagRTL);
   };
