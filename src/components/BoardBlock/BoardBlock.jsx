@@ -9,16 +9,21 @@ const BoardBlock = ({ size, cell, position, updatePosition, tokens }) => {
 
   const renderButton = () => {
     return (
-      <button className="board-block__button" onClick={setCellVal}></button>
+      <button
+        type="button"
+        title="claim-button"
+        className="board-block__button"
+        onClick={setCellVal}
+      ></button>
     );
   };
 
   const renderPlayerX = () => {
-    return <FontAwesomeIcon icon={faXmark} />;
+    return <FontAwesomeIcon data-testid="x-player" icon={faXmark} />;
   };
 
   const renderPlayerO = () => {
-    return <FontAwesomeIcon icon={faO} />;
+    return <FontAwesomeIcon data-testid="o-player" icon={faO} />;
   };
   return (
     <div style={{ width: `${100 / size}%` }}>
