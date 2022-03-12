@@ -6,7 +6,8 @@
   display: flex;
   width: 100%;
   max-width: 650px;
-  min-width: 650px;
+  min-width: 350px;
   margin: 0 auto;
   flex-wrap: wrap;
+  padding: 10px;
 }

@@ -1,10 +1,13 @@
 .board-block {
   height: 0;
   padding-bottom: 100%;
-  border: 2px solid green;
+  border: 4px solid white;
   border-collapse: collapse;
   position: relative;
   flex: 1 1 auto;
+  border-radius: 10px;
+  margin: 2%;
+  box-shadow: 0 0 16px 1px #0ff;
 }
 
 .board-block__inner-block {
@@ -32,5 +35,5 @@
   margin: 0;
   padding: 12px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 255, 255, 0.1);
 }

@@ -42,11 +42,11 @@ function GameBoard() {
   };
 
   const isRowWin = () => {
+    let isWin = false;
     board.forEach((row) => {
-      let isWin = checkVals(row);
-      if (isWin) return isWin;
+      isWin = !isWin ? checkVals(row) : isWin;
     });
-    return false;
+    return isWin;
   };
 
   const isColumnWin = () => {
@@ -95,8 +95,10 @@ function GameBoard() {
 
   const renderWinner = () => {
     if (!gameIsOver) return null;
-    if (playerTurn === playerTokens.X) return <p>Player X Wins!</p>;
-    if (playerTurn === playerTokens.O) return <p>Player O Wins!</p>;
+    if (playerTurn === playerTokens.X)
+      return <p className="--text-center">Player X Wins!</p>;
+    if (playerTurn === playerTokens.O)
+      return <p className="--text-center">Player O Wins!</p>;
   };
 
   useEffect(() => {
@@ -111,24 +113,27 @@ function GameBoard() {
   }, [board]);
 
   return (
-    <div className="play-area">
-      <h1>Test</h1>
-      {renderWinner()}
-      <div className="play-area__game-board">
-        {board.map((boardCol, colIndex) =>
-          boardCol.map((cell, cellIndex) => (
-            <BoardBlock
-              cell={cell}
-              position={{ colIndex, cellIndex }}
-              key={cellIndex}
-              size={boardSize}
-              tokens={playerTokens}
-              updatePosition={updatePosition}
-            />
-          ))
-        )}
+    <>
+      <h1 className="--text-center">Tic Tac Toe</h1>
+
+      <div className="play-area">
+        {renderWinner()}
+        <div className="play-area__game-board">
+          {board.map((boardCol, colIndex) =>
+            boardCol.map((cell, cellIndex) => (
+              <BoardBlock
+                cell={cell}
+                position={{ colIndex, cellIndex }}
+                key={cellIndex}
+                size={boardSize}
+                tokens={playerTokens}
+                updatePosition={updatePosition}
+              />
+            ))
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
