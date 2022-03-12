@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BoardBlock from "../BoardBlock/BoardBlock";
+import GameOver from "../GameOver/GameOver";
 import "./GameBoard.css";
 
 function GameBoard() {
@@ -92,17 +93,8 @@ function GameBoard() {
   };
 
   const togglePlayer = () => {
-    if (playerTurn == playerTokens.X) setPlayerTurn(playerTokens.O);
-    else if (playerTurn == playerTokens.O) setPlayerTurn(playerTokens.X);
-  };
-
-  const renderWinner = () => {
-    if (!gameIsOver) return null;
-    if (playerTurn === playerTokens.X)
-      return <p className="--text-center">Player X Wins!</p>;
-    if (playerTurn === playerTokens.O)
-      return <p className="--text-center">Player O Wins!</p>;
-    return <p className="--text-center">No Winner</p>;
+    if (playerTurn === playerTokens.X) setPlayerTurn(playerTokens.O);
+    else if (playerTurn === playerTokens.O) setPlayerTurn(playerTokens.X);
   };
 
   useEffect(() => {
@@ -117,7 +109,7 @@ function GameBoard() {
   }, [board]);
 
   useEffect(() => {
-    if (availableSpaces == 0 && !gameIsOver) {
+    if (availableSpaces === 0 && !gameIsOver) {
       setPlayerTurn(playerTokens.DRAW);
       setGameIsOver(true);
     }
@@ -128,7 +120,11 @@ function GameBoard() {
       <h1 className="--text-center">Tic Tac Toe</h1>
 
       <div className="play-area">
-        {renderWinner()}
+        <GameOver
+          gameIsOver={gameIsOver}
+          playerTokens={playerTokens}
+          playerTurn={playerTurn}
+        />
         <div className="play-area__game-board">
           {board.map((boardCol, colIndex) =>
             boardCol.map((cell, cellIndex) => (
