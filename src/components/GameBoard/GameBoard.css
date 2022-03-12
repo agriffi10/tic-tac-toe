@@ -1,0 +1,12 @@
+.play-area {
+  overflow: auto;
+}
+
+.play-area__game-board {
+  display: flex;
+  width: 100%;
+  max-width: 650px;
+  min-width: 650px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
