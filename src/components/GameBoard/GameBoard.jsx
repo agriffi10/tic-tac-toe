@@ -11,6 +11,7 @@ function GameBoard() {
    * [0, 0, 0]]
    */
   const [boardSize, setBoardSize] = useState(3);
+  const [availableSpaces, setAvailableSpaces] = useState(9);
   const [playerTurn, setPlayerTurn] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(false);
 
@@ -18,6 +19,7 @@ function GameBoard() {
   const playerTokens = {
     X: 1,
     O: 2,
+    DRAW: 3,
   };
 
   const configureBoard = () => {
@@ -85,6 +87,7 @@ function GameBoard() {
     // Copy the board to avoid object reference nonsense
     let tempArray = JSON.parse(JSON.stringify(board));
     tempArray[colIndex][cellIndex] = playerTurn;
+    setAvailableSpaces(availableSpaces - 1);
     setBoard(tempArray);
   };
 
@@ -99,6 +102,7 @@ function GameBoard() {
       return <p className="--text-center">Player X Wins!</p>;
     if (playerTurn === playerTokens.O)
       return <p className="--text-center">Player O Wins!</p>;
+    return <p className="--text-center">No Winner</p>;
   };
 
   useEffect(() => {
@@ -111,6 +115,13 @@ function GameBoard() {
     // Any time the board updates lets check to see if we have a winner
     setGameIsOver(checkWinCondition());
   }, [board]);
+
+  useEffect(() => {
+    if (availableSpaces == 0 && !gameIsOver) {
+      setPlayerTurn(playerTokens.DRAW);
+      setGameIsOver(true);
+    }
+  }, [availableSpaces]);
 
   return (
     <>
